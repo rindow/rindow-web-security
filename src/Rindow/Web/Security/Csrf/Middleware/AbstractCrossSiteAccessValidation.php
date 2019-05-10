@@ -109,7 +109,8 @@ abstract class AbstractCrossSiteAccessValidation
             $strnames = implode(',', $cookieNames);
             $strtkn = implode(',', $response->getHeader('Set-Cookie'));
             $this->logDebug('addCsrfTokenCookie:'.$strnames.'[Set-Cookie:'.$strtkn.']');
-            if(!empty($request->getHeader('Origin'))) {
+            $origin = $request->getHeader('Origin');
+            if(!empty($origin)) {
                 $headers = isset($config['corsHeaders'])?$config['corsHeaders']:null;
                 $response = $this->crossSiteAccess->addCorsHeaders($request,$response,$headers);
                 $strtkn = empty($headers)?'':implode(',', array_keys($headers));
