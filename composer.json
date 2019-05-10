@@ -1,0 +1,52 @@
+{
+    "name": "rindow/rindow-web-security",
+    "type": "library",
+    "description": "Apply authentication, access control, etc. to the web",
+    "keywords": ["rindow","framework","web","security"],
+    "license": "BSD-3-Clause",
+    "require": {
+        "php": ">=5.3.3",
+        "psr/http-message": "^1.0",
+        "interop-phpobjects/lenient-security": "*",
+        "rindow/rindow-stdlib": "*",
+        "rindow/rindow-security-core": "*",
+        "rindow/rindow-web-mvc": "*"
+    },
+    "require-dev": {
+        "rindow/rindow-stdlib": "*",
+        "rindow/rindow-container": "*",
+        "rindow/rindow-aop": "*",
+        "rindow/rindow-annotation": "*",
+        "rindow/rindow-security-core": "*",
+        "rindow/rindow-validation": "*",
+        "rindow/rindow-web-form": "*",
+        "rindow/rindow-web-http": "*",
+        "rindow/rindow-web-router": "*",
+        "rindow/rindow-web-view": "*",
+        "rindow/rindow-web-session": "*",
+        "rindow/rindow-web-mvc": "*"
+    },
+    "suggest": {
+        "rindow/rindow-container": "It needs some service container",
+        "rindow/rindow-web-router": "Web routing engine for Web-MVC framework",
+        "rindow/rindow-user-core": "Simplified version user management tool"
+    },
+    "autoload": {
+        "psr-0": {
+            "Rindow\\Web\\Service\\": "src/"
+        }
+    },
+
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://rindow.github.io/rindow-packagist/packages.json",
+            "options": {
+                "ssl": {
+                    "verify_peer": "true"
+                }
+            }
+        }
+    ],
+    "minimum-stability": "dev"
+}
