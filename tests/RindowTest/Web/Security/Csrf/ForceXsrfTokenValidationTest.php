@@ -35,7 +35,7 @@ class TestMiddleware
 
 class Test extends TestCase
 {
-    public function getMiddleware(array $customConfig=null)
+    public function getMiddleware(array $customConfig=null,array $pathPrefixes=null)
     {
         $config = array(
             'xsrfHeaderNames' => array(
@@ -62,6 +62,7 @@ class Test extends TestCase
         $middleware = new ForceXsrfTokenValidation();
         $middleware->setConfig($config);
         $middleware->setCrossSiteAccess($utility);
+        $middleware->setPathPrefixes($pathPrefixes);
         $next = new TestMiddleware();
         return array($middleware,$next);
     }
@@ -161,6 +162,30 @@ class Test extends TestCase
         list($middleware,$next) = $this->getMiddleware($config);
 
         $uri = new Uri('http://localhost:8000/nocheck');
+        $request = new ServerRequest(
+            $serverParams = null,
+            $parsedBody = null,
+            $uploadedParams = null,
+            $cookieParams = null,
+            $attributes = null,
+            $uri,
+            $method='GET',
+            $body=null,
+            $headers=null
+        );
+        $response = new Response();
+        $newResponse = $middleware->__invoke($request,$response,$next);
+        $this->assertEquals(array(),$newResponse->getHeader('Set-Cookie'));
+    }
+
+    public function testValidDefaultGetFromLocalInsideExcludingPathsInNamespaces()
+    {
+        $config = array('excludingPathsInNamespaces'=>
+            array(__NAMESPACE__=>array('/nocheck'=>true)));
+        $setPathPrefixes = array(__NAMESPACE__=>'/myApp');
+        list($middleware,$next) = $this->getMiddleware($config,$setPathPrefixes);
+
+        $uri = new Uri('http://localhost:8000/myApp/nocheck');
         $request = new ServerRequest(
             $serverParams = null,
             $parsedBody = null,

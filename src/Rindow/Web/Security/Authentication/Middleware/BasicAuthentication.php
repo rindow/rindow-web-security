@@ -52,6 +52,11 @@ class BasicAuthentication extends AbstractAuthentication
         $this->getSecurityContext()->setAuthentication($token);
     }
 
+    protected function exitSecurityContext(ServerRequestInterface $request,$response)
+    {}
+    protected function exceptionsSecurityContext(ServerRequestInterface $request,$response,$exception)
+    {}
+
     protected function createTransitioner(ServerRequestInterface $request, ResponseInterface $response, \Exception $e)
     {
         if($this->realm)

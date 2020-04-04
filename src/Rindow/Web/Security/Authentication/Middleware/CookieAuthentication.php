@@ -49,6 +49,12 @@ class CookieAuthentication extends AbstractAuthentication
         $this->getSecurityContext()->setDefaultAuthentication($token);
     }
 
+    protected function exitSecurityContext(ServerRequestInterface $request,$response)
+    {}
+
+    protected function exceptionsSecurityContext(ServerRequestInterface $request,$response,$exception)
+    {}
+
     protected function createTransitioner(ServerRequestInterface $request, ResponseInterface $response, \Exception $e)
     {
         if(!isset($this->loginUrl))

@@ -37,6 +37,7 @@ class Module
                         'properties' => array(
                             'crossSiteAccess' => array('ref' => 'Rindow\\Web\\Security\\Csrf\\DefaultCrossSiteAccessUtility'),
                             'config' => array('config' => 'security::web::forceXsrfTokenValidation'),
+                            'pathPrefixes' => array('config' => 'web::router::pathPrefixes'),
                         ),
                     ),
                     'Rindow\\Web\\Security\\Csrf\\Middleware\\DefaultSameOriginAccessValidation' => array(
@@ -85,10 +86,23 @@ class Module
                         'xsrfCookiePath' => '/',
                         'csrfPostField' => 'csrf_token',
 
-                        // If you do not want to include a specific path in validation, you write paths of uri to "excludingPaths".
-                        // Please note that the following path is uri in Psr\Http\Message\RequestInterface, not path on the framework.
+                        // If you do not want to include a specific path in validation, 
+                        // you write paths of uri to "excludingPaths".
+                        // Please note that the following path is uri in
+                        // Psr\Http\Message\RequestInterface, not path on the framework.
+                        //
                         // 'excludingPaths' => array(
                         //     '/path/path' => true,
+                        // ),
+                        //
+                        // If you want to use excludingPaths in your module configs,
+                        // You should use following setting. Because the URL path changes
+                        // by 'web::router::pathPrefixes' configuration.
+                        //
+                        // 'excludingPathsInNamespaces' => array(
+                        //     'Your\Web\Mvc\Path\Prefixes\Namespace' => array(
+                        //         '/path/without/prefix' => true,
+                        //     )
                         // ),
                     ),
 

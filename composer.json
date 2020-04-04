@@ -8,26 +8,27 @@
         "php": ">=5.3.3",
         "psr/http-message": "^1.0",
         "interop-phpobjects/lenient-security": "*",
-        "rindow/rindow-stdlib": "*",
-        "rindow/rindow-security-core": "*",
-        "rindow/rindow-web-mvc": "*"
+        "rindow/rindow-stdlib": "1.*",
+        "rindow/rindow-security-core": "1.*",
+        "rindow/rindow-web-mvc": "1.*"
     },
     "require-dev": {
-        "rindow/rindow-stdlib": "*",
-        "rindow/rindow-container": "*",
-        "rindow/rindow-aop": "*",
-        "rindow/rindow-annotation": "*",
-        "rindow/rindow-security-core": "*",
-        "rindow/rindow-validation": "*",
-        "rindow/rindow-web-form": "*",
-        "rindow/rindow-web-http": "*",
-        "rindow/rindow-web-router": "*",
-        "rindow/rindow-web-view": "*",
-        "rindow/rindow-web-session": "*",
-        "rindow/rindow-web-mvc": "*"
+        "rindow/rindow-stdlib": "1.*",
+        "rindow/rindow-container": "1.*",
+        "rindow/rindow-aop": "1.*",
+        "rindow/rindow-annotation": "1.*",
+        "rindow/rindow-security-core": "1.*",
+        "rindow/rindow-validation": "1.*",
+        "rindow/rindow-web-form": "1.*",
+        "rindow/rindow-web-http": "1.*",
+        "rindow/rindow-web-router": "1.*",
+        "rindow/rindow-web-view": "1.*",
+        "rindow/rindow-web-session": "1.*",
+        "rindow/rindow-web-mvc": "1.*"
     },
     "suggest": {
         "rindow/rindow-container": "It needs some service container",
+        "rindow/rindow-web-session": "It needs some PHP session service",
         "rindow/rindow-web-router": "Web routing engine for Web-MVC framework",
         "rindow/rindow-user-core": "Simplified version user management tool"
     },
@@ -35,18 +36,5 @@
         "psr-0": {
             "Rindow\\Web\\Security\\": "src/"
         }
-    },
-
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://rindow.github.io/rindow-packagist/packages.json",
-            "options": {
-                "ssl": {
-                    "verify_peer": "true"
-                }
-            }
-        }
-    ],
-    "minimum-stability": "dev"
+    }
 }

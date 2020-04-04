@@ -10,6 +10,8 @@ use Rindow\Security\Core\Authorization\Exception\AuthenticationRequiredException
 abstract class AbstractAuthentication
 {
     abstract protected function initSecurityContext(ServerRequestInterface $request);
+    abstract protected function exitSecurityContext(ServerRequestInterface $request,$response);
+    abstract protected function exceptionsSecurityContext(ServerRequestInterface $request,$response,$exception);
     abstract protected function createTransitioner(ServerRequestInterface $request, ResponseInterface $response, \Exception $e);
 
     protected $securityContext;
@@ -39,18 +41,27 @@ abstract class AbstractAuthentication
         try {
             $this->initSecurityContext($request);
             if(is_object($next))
-                return $next->__invoke($request, $response);
-            return call_user_func($next, $request, $response);
+                $response = $next->__invoke($request, $response);
+            else
+                $response = call_user_func($next, $request, $response);
+            $this->exitSecurityContext($request,$response);
+            return $response;
         } catch(AuthenticationException $e) {
             ;
         } catch(AuthenticationRequiredException $e) {
             ;
         } catch(AccessDeniedException $e) {
             $token = $this->getSecurityContext()->getAuthentication();
-            if(!$this->getAuthenticationTrustResolver()->isAnonymous($token))
+            if(!$this->getAuthenticationTrustResolver()->isAnonymous($token)) {
+                $this->exceptionsSecurityContext($request,$response,$e);
                 throw $e;
+            }
+        } catch(\Exception $e) {
+            $this->exceptionsSecurityContext($request,$response,$e);
+            throw $e;
         }
         $response = $this->createTransitioner($request, $response, $e);
+        $this->exceptionsSecurityContext($request,$response,$e);
         return $response;
     }
 }
