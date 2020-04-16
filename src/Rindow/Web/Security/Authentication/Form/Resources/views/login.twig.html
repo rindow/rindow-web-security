@@ -1,0 +1,21 @@
+{% extends layout %}
+
+{% block title %}Login Sample{% endblock %}
+
+{% block body %}
+<div class="container grid-container mdl-layout__content">
+<div class="row grid-x mdl-grid">
+<div class="col-sm-12 columns cell small-12 mdl-cell mdl-cell--12-col">
+{% if backurl %}<p>
+  <nav>
+    <a class="button tiny radius btn btn-sm btn-default" href="{{ backurl }}">&laquo; Back</a>
+  </nav>
+{% endif %}
+</p>
+<h3>Sign in</h3>
+{{ form_add(form,'submit','go','Login',' ') }}
+{{ form_raw(form) }}
+</div>
+</div>
+</div><!--class="container"-->
+{% endblock %}

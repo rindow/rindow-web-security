@@ -1,0 +1,21 @@
+{extends file=$layout}
+
+{block name=title}Form Demo{/block}
+
+{block name=body}
+<div class="container grid-container mdl-layout__content">
+<div class="row grid-x mdl-grid">
+<div class="col-sm-12 columns cell small-12 mdl-cell mdl-cell--12-col">
+{if isset($backurl)}<p>
+  <nav>
+    <a class="button tiny radius btn btn-sm btn-default" href="{$backurl}">&laquo; Back</a>
+  </nav>
+{/if}
+</p>
+<h3>Sign in</h3>
+{form_add element=$form type='submit' name='go' value='Login' label=' '}
+{form_raw element=$form}
+</div>
+</div>
+</div><!--class="container"-->
+{/block}
